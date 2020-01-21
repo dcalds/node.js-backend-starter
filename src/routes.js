@@ -9,14 +9,17 @@ const SearchController = require('./controllers/SearchController')
 
 // Descrição dos Verbos da API REST
     // GET
-routes.get('/', (req, res) => { return response.json({ message: "Aplicação em funcionamento!"}) })
-routes.get('/search', ExampleSchemaController.index)
+routes.get('/', (req, res) => { return res.json({ message: "Aplicação em funcionamento!"}) })
+routes.get('/searchall', ExampleSchemaController.index)
+routes.get('/search', SearchController.index)
 
     // POST
-routes.post('/save', ExampleSchemaController.store)
+routes.post('/create', ExampleSchemaController.store)
 
     // PUT
+routes.put('/edit/:id', ExampleSchemaController.update)
 
     // DELETE
+routes.delete('/delete/:id', ExampleSchemaController.destroy)
 
 module.exports = routes

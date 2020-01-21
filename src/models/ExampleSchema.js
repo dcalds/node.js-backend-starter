@@ -8,10 +8,19 @@ const ExampleSchema = new Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    steam_user: {
+        type: String,
+        required: true
+    },
+    game_list:[String]
 },{
     // createdAt, updatedAt
     timestamps: true
 });
 
-module.exports = model('Dev', ExampleSchema);
+module.exports = model('Gamer', ExampleSchema)

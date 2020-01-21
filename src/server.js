@@ -6,7 +6,7 @@ const routes = require('./routes')
 const server = express()
 
 // Conexão com o banco de dados (Devemos configurar o user, password e nome do banco caso não exista)
-mongoose.connect(" // String de conexão com o MongoDB " , {
+mongoose.connect(" String de conexão com banco de dados" , {
     // Resolve o erro de deprecated
     useNewUrlParser: true,
     useUnifiedTopology: true

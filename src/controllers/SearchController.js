@@ -3,12 +3,10 @@ const ExampleSchema = require('../models/ExampleSchema')
 
 module.exports = {
     async index (req, res) {
-        const { name } = req.query
+        const { steam_user } = req.query
 
-        const response = ExampleSchema.find({
-            // filters
-        })
-
+        const response = await ExampleSchema.find({ steam_user })
+        
         return res.json(response)
     }
 }

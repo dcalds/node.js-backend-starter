@@ -2,19 +2,18 @@
 const ExampleSchema = require('../models/ExampleSchema')
 
 module.exports = {
-    async index(req, res) { 
+    async index(req, res) {
         // Retorna uma lista do modelo ExampleSchema criada no Banco de Dados
         const response = await ExampleSchema.find()
 
         return res.json(response)
     },
     async store(req, res) {
-
         // Desestruturação
-        const { name } = req.body
+        const { name, email, steam_user, game_list } = req.body
 
         // Método para Busca no Banco de Dados
-        const ExampleExists = await ExampleSchema.findOne({ name });
+        const ExampleExists = await ExampleSchema.findOne({ steam_user });
 
         // Caso exista uma instância deste objeto no Banco de Dados
         if (ExampleExists) {
@@ -25,15 +24,35 @@ module.exports = {
         else {
             // Cria uma nova instância
             const NewExampleSchema = await ExampleSchema.create({
-                name
+                name,
+                email,
+                steam_user,
+                game_list
             })
             // Retorna nova instância criada
             return res.json(NewExampleSchema);
         }
     },
-    async show(req, res) { },
-    async update(req, res) { },
-    async destroy(req, res) { }
+    async update(req, res) {
+        
+        let user = await ExampleSchema.findById(req.params.id)
+
+        user.name = req.body.new_name
+
+        await user.save()
+
+        return res.json({ message: `Usuário ${user.name} editado.` })
+    },
+    async destroy(req, res) {
+
+        let user = await ExampleSchema.findById(req.params.id)
+
+        const username = user.name
+
+        await user.remove()
+
+        return res.json({ message: `Usuário ${username} removido.` })
+    }
 }
 
 // Boas práticas
